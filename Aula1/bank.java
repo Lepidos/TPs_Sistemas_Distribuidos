@@ -1,7 +1,6 @@
 public class Bank {
     HashMap<String, Double> accounts = new HashMap<>();
 
-    
 
     public void open(String accountNumber) {
         accounts.put(accountNumber, 0.0);
