@@ -3,6 +3,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 class Bank {
 
+  ReentrantLock lock = new ReentrantLock();
   private static class Account {
     private int balance;
     Account(int balance) { this.balance = balance; }
@@ -18,11 +19,21 @@ class Bank {
 
   // Account balance
   public int balance() {
-	return savings.balance();
+	lock.lock();
+	try {
+		return savings.balance();
+	} finally {
+		lock.unlock();
+	}
   }
 
   // Deposit
   boolean deposit(int value) {
-	return savings.deposit(value);
+	lock.lock();
+	try {
+    		return savings.deposit(value);
+	} finally {
+		lock.unlock();
+	}
   }
 }
